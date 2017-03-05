@@ -1,0 +1,226 @@
+<div ng-controller="homeCtrl">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img ng-src="{{urlImage}}{{imgSlide[0].image}}" alt="Foundation" width="100%">
+            </div>
+            <div class="item">
+                <img ng-src="{{urlImage}}{{imgSlide[1].image}}" alt="Foundation" width="100%">
+            </div>
+            <div class="item">
+                <img ng-src="{{urlImage}}{{imgSlide[2].image}}" alt="Foundation" width="100%">
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" data-target="#carousel-example-generic" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" data-target="#carousel-example-generic" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="service">
+        <div class="container">
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="ser2">
+                    <p><span class="fa fa-money img-thumbnail img-circle" aria-hidden="true"></span> Thanh toán khi nhận hàng</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="ser2">
+                    <p><span class="fa fa-truck img-thumbnail img-circle" aria-hidden="true"></span> Vận chuyển toàn quốc</p>
+                </div>
+
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="ser2">
+                    <p><span class="fa fa-refresh img-thumbnail img-circle" aria-hidden="true"></span> Chính sách đổi trả hàng</p>
+                </div>
+
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-6">
+                <div class="ser2">
+                    <p><span class="fa fa-shield img-thumbnail img-circle" aria-hidden="true"></span> Bảo hành toàn quốc</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-md-3 col-sm-12 col-xs-12">
+            <div id='flyout_menu'>
+                <ul class="fl-menu">
+                    <h2><i class="fa fa-bars"> </i>&nbsp; DANH MỤC</h2>
+                </ul>
+                <!--<div class="ngloading" ng-show="loading"><img src="../data1/loading.gif" alt=""/></div>-->   
+                <ul class="fl-mn">
+                    <li ng-repeat="lv1 in lv1category">
+                        <a href='/danh-muc/{{lv1.seo_vi}}-{{lv1.id}}.1' ng-click="changename(lv1.name_vi)"><h1>{{lv1.name_vi}}</h1></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-8 col-xs-12">
+            <div id="right-menu">
+                <ul class="rt-menu">
+                    <h2>SẢN PHẨM MỚI</h2>
+                </ul>
+                <div class="ngloading" ng-show="loading"><img src="../images/loading.gif"  alt="Foundation"/></div>
+                <div class="rt-mn">
+                    <div class="row rm-body " ng-repeat="item in prodNew| orderBy:'random'|limitTo:2">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <a href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><img ng-src="{{urlImage + item.image}}" class="img img-responsive"></a>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <a class="name-prod" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}" >{{item.name_vi}}</a>
+                            <h5 ng-show="item.price_vn !== 0">
+                                {{(1 - item.price_off_percent / 100)*item.price_vn|currency:number:0}} &nbsp;
+                                <span ng-if="item.price_off_percent !== 0"> {{item.price_vn|currency:number:0}}</span>
+                            </h5>
+
+                            <a class="link-detail" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><i class="fa fa-eye" aria-hidden="true"> </i> Chi tiết</a>
+                            <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" nameseo="{{item.name_seo_vi}}" price="{{(1 - item.price_off_percent / 100) * item.price_vn}}" seles="{{item.price_off_percent}}" quantity="1" img="{{urlImage}}{{item.image}}" imgname="{{item.image}}">Đặt hàng</ngcart-addtocart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-4 col-xs-12 images">
+            <img ng-src="{{urlImage}}{{imgSlide[4].image}}" alt="Foundation" class="img img-responsive" width="100%">
+            <br class="hidden-xs">
+            <img ng-src="{{urlImage}}{{imgSlide[3].image}}" alt="Foundation" class="img img-responsive" width="100%">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-md-12 prodseles">
+            <h1>
+                <strong>GẠCH TRANG TRÍ</strong>
+            </h1>
+            <div class="ngloading" ng-show="loading"><img src="../images/loading.gif"  alt="Foundation"/></div>
+            <data-owl-carousel class="owl-carousel" data-options="{autoPlay:3000 ,navigation: true, pagination: false, rewindNav : true, items: 3, itemsDesktop: 3}">
+                <div owl-carousel-item="" ng-repeat="item in ::prodCategory1" class="row item">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <a href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><img ng-src="{{urlImage + item.image}}" class="img img-responsive"></a>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <a class="name-prod" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}" >{{item.name_vi}}</a>
+                            <h5 ng-show="item.price_vn !== 0">
+                                {{(1 - item.price_off_percent / 100)*item.price_vn|currency:number:0}}
+                                <br><span ng-show="item.price_off_percent !== 0"> {{item.price_vn|currency:number:0}}</span>
+                                <br ng-hide="item.price_off_percent !== 0">
+                            </h5>
+
+                            <a class="link-detail" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" nameseo="{{item.name_seo_vi}}" price="{{(1 - item.price_off_percent / 100) * item.price_vn}}" seles="{{item.price_off_percent}}" quantity="1" img="{{urlImage}}{{item.image}}" imgname="{{item.image}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"> </i> </ngcart-addtocart>
+                        </div>
+                    </div>
+                </div>
+            </data-owl-carousel>
+        </div>
+        <div class="col-md-12 prodseles">
+            <h1>
+                <strong>SÀN GỖ</strong>
+            </h1>
+            <div class="ngloading" ng-show="loading"><img src="../images/loading.gif"  alt="Foundation"/></div>
+            <data-owl-carousel class="owl-carousel" data-options="{autoPlay:3000 ,navigation: true, pagination: false, rewindNav : true, items: 3, itemsDesktop: 3}">
+                <div owl-carousel-item="" ng-repeat="item in ::prodCategory2" class="row item">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <a href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><img ng-src="{{urlImage + item.image}}" class="img img-responsive"></a>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <a class="name-prod" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}" >{{item.name_vi}}</a>
+                            <h5 ng-show="item.price_vn !== 0">
+                                {{(1 - item.price_off_percent / 100)*item.price_vn|currency:number:0}}
+                                <br><span ng-show="item.price_off_percent !== 0"> {{item.price_vn|currency:number:0}}</span>
+                                <br ng-hide="item.price_off_percent !== 0">
+                            </h5>
+
+                            <a class="link-detail" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" nameseo="{{item.name_seo_vi}}" price="{{(1 - item.price_off_percent / 100) * item.price_vn}}" seles="{{item.price_off_percent}}" quantity="1" img="{{urlImage}}{{item.image}}" imgname="{{item.image}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"> </i> </ngcart-addtocart>
+                        </div>
+                    </div>
+                </div>
+            </data-owl-carousel>
+        </div>
+    </div>
+    <div class="container">
+        <img style="margin: 40px 0" ng-src="{{urlImage}}{{imgSlide[5].image}}" alt="Foundation" class="img img-responsive">
+    </div>
+    <div class="container">
+        <div class="col-md-12 prodseles">
+            <h1>
+                <strong>SẢN PHẨM KHUYẾN MÃI</strong>
+            </h1>
+            <div class="ngloading" ng-show="loading"><img src="../images/loading.gif"  alt="Foundation"/></div>
+            <data-owl-carousel class="owl-carousel" data-options="{autoPlay:3000 ,navigation: true, pagination: false, rewindNav : true, items: 3, itemsDesktop: 3}">
+                <div owl-carousel-item="" ng-repeat="item in ::prodPromote" class="row item">
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <span class="product-item-sale"></span>
+                        <a href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><img ng-src="{{urlImage + item.image}}" class="img img-responsive"></a>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-6">
+                        <div class="row">
+                            <a class="name-prod" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}" >{{item.name_vi}}</a>
+                            <h5 ng-show="item.price_vn !== 0">
+                                {{(1 - item.price_off_percent / 100)*item.price_vn|currency:number:0}}
+                                <br><span ng-show="item.price_off_percent !== 0"> {{item.price_vn|currency:number:0}}</span>
+                                <br ng-hide="item.price_off_percent !== 0">
+                            </h5>
+
+                            <a class="link-detail" href="/chi-tiet/{{item.name_seo_vi}}-{{item.id}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <ngcart-addtocart id="{{item.id}}" name="{{item.name_vi}}" nameseo="{{item.name_seo_vi}}" price="{{(1 - item.price_off_percent / 100) * item.price_vn}}" seles="{{item.price_off_percent}}" quantity="1" img="{{urlImage}}{{item.image}}" imgname="{{item.image}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"> </i> </ngcart-addtocart>
+                        </div>
+                    </div>
+                </div>
+            </data-owl-carousel>
+        </div>
+    </div><br>
+    <div class="container partners">
+        <div class="col-md-6 col-sm-12 par-1">
+            <h4>DỊCH VỤ</h4>
+            <div class="col-md-6 col-sm-6 p1">
+                <h5><img src="../images/icon-sc.png" alt="Foundation" /> Sửa chữa nhà</h5>  
+                <p>Với nhiều năm kinh nghiệm sửa chữa và cải tạo nhà, chúng tôi sẽ mang đến dịch vụ tốt nhất cho nhà bạn.</p>
+                <a href="/">Chi tiết ></a>
+            </div>
+            <div class="col-md-6 col-sm-6 p1">
+                <h5><img src="../images/icon-ld.png" alt="Foundation" /> Thi công lắp đặt</h5>
+                <p>Chúng tôi luôn hiểu và sẽ luôn mang đến những dịch vụ tốt và hoàn hảo nhất cho ngôi nhà của bạn.</p>
+                <a href="/">Chi tiết ></a>
+            </div>
+            <div class="col-md-6 col-sm-6 p1">
+                <h5><img src="../images/icon-tvxd.png" alt="Foundation" /> Tư vấn xây dựng</h5>
+                <p>Chúng tôi sẽ tư vấn xây dựng để mang đến cho bạn những dịch vụ tốt nhất dành cho ngôi nhà của bạn.</p>
+                <a href="/">Chi tiết ></a>
+            </div>
+            <div class="col-md-6 col-sm-6 p1">
+                <h5><img src="../images/icon-tvtk.png" alt="Foundation" /> Tư vấn thiết kế</h5>
+                <p>Chuyên thiết kế và thi công xây dựng các mẫu biệt thự hiện đại cổ điển, mẫu nhà phố đẹp sang trọng.</p>
+                <a href="/">Chi tiết ></a>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12 par-2">
+            <div><img ng-src="{{urlImage}}{{imgSlide[6].image}}" alt="Foundation" width="100%"></div>
+            <h4>GIỚI THIỆU</h4>
+            <div class="p2">              
+                <p>Công ty Foundation chuyên cung cấp vật liệu xây dựng uy tín, chuyên nghiệp khắp cả nước. Với đội ngũ kỹ sư năng động, chuyên nghiệp sẽ làm thoả mãn tất cả những khách hàng khó tính nhất.</p>
+                <a href="/gioi-thieu">Chi tiết ></a>
+            </div>
+        </div>
+    </div><br>
+</div>
